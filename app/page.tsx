@@ -9,14 +9,6 @@ import { RulesModal } from "./src/components/RulesModal";
 import { useTamagotchi } from "./src/hooks/useTamagotchi";
 import Image from "next/image";
 import { Wallet } from "@coinbase/onchainkit/wallet";
-import { useMiniKit } from "@coinbase/onchainkit/minikit";
-// import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   other: {
-//     "base:app_id": "697b7bec748a9bde7c61abee",
-//   },
-// };
 
 // Типизация для пользователя
 interface UserProfile {
@@ -38,22 +30,7 @@ interface AuthResponse {
 
 export default function Home() {
   const { isReady } = useMiniApp();
-  const { setFrameReady, isFrameReady, context } = useMiniKit();
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-
-  useEffect(() => {
-    if (!isFrameReady) {
-      setFrameReady();
-    }
-  }, [setFrameReady, isFrameReady]);
-
-  // Получаем данные пользователя после инициализации
-  useEffect(() => {
-    if (isFrameReady && context?.user) {
-      console.log("User context:", context.user);
-      setUserProfile(context.user as UserProfile);
-    }
-  }, [isFrameReady, context]);
+  const [userProfile] = useState<UserProfile | null>(null);
 
   const { address } = useAccount();
   const { pet, quest, createPet, feed, play, sleep, isPending } =
