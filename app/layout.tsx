@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
             type: "launch_frame",
           },
         },
-        "base:app_id": "697b7bec748a9bde7c61abee",
       }),
+      "base:app_id": "697b7bec748a9bde7c61abee",
     },
   };
 }
