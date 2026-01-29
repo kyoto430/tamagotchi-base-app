@@ -9,6 +9,13 @@ import { RulesModal } from "./src/components/RulesModal";
 import { useTamagotchi } from "./src/hooks/useTamagotchi";
 import Image from "next/image";
 import { Wallet } from "@coinbase/onchainkit/wallet";
+// import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+//   other: {
+//     "base:app_id": "697b7bec748a9bde7c61abee",
+//   },
+// };
 
 // Типизация для пользователя
 interface UserProfile {
@@ -64,9 +71,9 @@ export default function Home() {
   return (
     <main className="min-h-screen p-4">
       <div className="max-w-md mx-auto py-8">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">🐾 Web3 Tamagotchi</h1>
-          <p className="text-gray-600 mb-4">
+        <header className="bg-white pixel-border text-center mb-8">
+          <h1 className="text-4xl font-bold mb-2 mt-2">🐾 Tamagotchi</h1>
+          <p className="mb-4">
             Виртуальный питомец на блокчейне Base
           </p>
 
@@ -78,50 +85,45 @@ export default function Home() {
               📖 Правила
             </button>
           </div>
-
-          {/* Отображение информации о пользователе */}
-          {userProfile ? (
-            <div className="flex gap-3 ml-4">
-              {/* Аватар */}
-              {userProfile.pfpUrl && (
-                <Image
-                  src={userProfile.pfpUrl}
-                  alt={userProfile.username || "User avatar"}
-                  width={48}
-                  height={48}
-                  className="object-cover"
-                  unoptimized
-                />
-              )}
-
-              {/* Имя пользователя */}
-              <div className="flex flex-col">
-                {userProfile.displayName && (
-                  <span className="font-semibold text-sm text-white">
-                    {userProfile.displayName}
-                  </span>
-                )}
-                {userProfile.username && (
-                  <span className="text-xs text-gray-500">
-                    @{userProfile.username}
-                  </span>
-                )}
-              </div>
-            </div>
-          ) : (
-            <Wallet />
-          )}
         </header>
 
         {!address ? (
           <div className="bg-white pixel-border p-8 text-center">
-            <p className="text-lg mb-4">
-              👆 Подключите кошелек, чтобы начать играть
-            </p>
-            <p className="text-sm text-gray-600">Нужна сеть Base Mainnet</p>
+            {/* Отображение информации о пользователе */}
+            {userProfile ? (
+              <div className="flex gap-3 ml-4">
+                {/* Аватар */}
+                {userProfile.pfpUrl && (
+                  <Image
+                    src={userProfile.pfpUrl}
+                    alt={userProfile.username || "User avatar"}
+                    width={48}
+                    height={48}
+                    className="object-cover"
+                    unoptimized
+                  />
+                )}
+
+                {/* Имя пользователя */}
+                <div className="flex flex-col">
+                  {userProfile.displayName && (
+                    <span className="font-semibold text-sm text-white">
+                      {userProfile.displayName}
+                    </span>
+                  )}
+                  {userProfile.username && (
+                    <span className="text-xs text-gray-500">
+                      @{userProfile.username}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <Wallet />
+            )}
           </div>
         ) : !hasPet ? (
-          <div className="bg-white pixel-border p-6">
+          <div className="bg-white pixel-border p-2">
             <PetSelection onSelect={createPet} isPending={isPending} />
           </div>
         ) : (
@@ -133,9 +135,8 @@ export default function Home() {
           />
         )}
 
-        <footer className="text-center mt-8 text-sm text-gray-600">
+        <footer className="text-center mt-8 text-sm text-white">
           <p>Все транзакции бесплатные, только газ сети Base</p>
-          <p className="mt-2">Играйте каждый день для поддержания стрика! 🔥</p>
         </footer>
       </div>
 

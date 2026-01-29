@@ -84,7 +84,7 @@ export function RulesModal({
 
         <button
           onClick={onClose}
-          className="btn-pixel w-full mt-6 bg-primary text-white"
+          className="btn-pixel w-full mt-6 bg-primary"
         >
           Понятно!
         </button>
