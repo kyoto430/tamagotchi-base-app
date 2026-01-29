@@ -2,9 +2,21 @@
 import { useState, useEffect } from "react";
 import sdk from "@farcaster/miniapp-sdk";
 import { useMiniApp } from "./providers/MiniAppProvider";
-import { useRouter } from "next/navigation";
-import { farcasterConfig } from "../farcaster.config";
-import styles from "./page.module.css";
+import { useAccount } from "wagmi";
+import { PetSelection } from "./src/components/PetSelection";
+import { GameScreen } from "./src/components/GameScreen";
+import { RulesModal } from "./src/components/RulesModal";
+import { useTamagotchi } from "./src/hooks/useTamagotchi";
+import Image from "next/image";
+import { Wallet } from "@coinbase/onchainkit/wallet";
+
+// Типизация для пользователя
+interface UserProfile {
+  fid: number;
+  username?: string;
+  displayName?: string;
+  pfpUrl?: string;
+}
 
 interface AuthResponse {
   success: boolean;
@@ -16,28 +28,25 @@ interface AuthResponse {
   message?: string; // Error messages come as 'message' not 'error'
 }
 
-
 export default function Home() {
-  const { context, isReady } = useMiniApp();
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
- 
-  
+  const { isReady } = useMiniApp();
+  const [userProfile] = useState<UserProfile | null>(null);
 
-  // If you need to verify the user's identity, you can use the SDK's quickAuth.
-  // This will verify the user's signature and return the user's FID. You can update
-  // this to meet your needs. See the /app/api/auth/route.ts file for more details.
-  // Note: If you don't need to verify the user's identity, you can get their FID and other user data
-  // via `context.user.fid`.
-  const [authData, setAuthData] = useState<AuthResponse | null>(null);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
-  const [authError, setAuthError] = useState<Error | null>(null);
+  const { address } = useAccount();
+  const { pet, quest, createPet, feed, play, sleep, isPending } =
+    useTamagotchi(address);
+  const [showRules, setShowRules] = useState(false);
+
+  const hasPet = pet?.exists;
+
+  const [, setAuthData] = useState<AuthResponse | null>(null);
+  const [, setIsAuthLoading] = useState(true);
+  const [, setAuthError] = useState<Error | null>(null);
 
   useEffect(() => {
     const authenticate = async () => {
       try {
-        const response = await sdk.quickAuth.fetch('/api/auth');
+        const response = await sdk.quickAuth.fetch("/api/auth");
         const data = await response.json();
         setAuthData(data);
       } catch (err) {
@@ -52,76 +61,85 @@ export default function Home() {
     }
   }, [isReady]);
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    // Check authentication first
-    if (isAuthLoading) {
-      setError("Please wait while we verify your identity...");
-      return;
-    }
-
-    if (authError || !authData?.success) {
-      setError("Please authenticate to join the waitlist");
-      return;
-    }
-
-    if (!email) {
-      setError("Please enter your email address");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
-    // TODO: Save email to database/API with user FID
-    console.log("Valid email submitted:", email);
-    console.log("User authenticated:", authData.user);
-    
-    // Navigate to success page
-    router.push("/success");
-  };
-
   return (
-    <div className={styles.container}>
-      <button className={styles.closeButton} type="button">
-        ✕
-      </button>
-      
-      <div className={styles.content}>
-        <div className={styles.waitlistForm}>
-          <h1 className={styles.title}>Join {farcasterConfig.miniapp.name.toUpperCase()}</h1>
-          
-          <p className={styles.subtitle}>
-             Hey {context?.user?.displayName || "there"}, Get early access and be the first to experience the future of<br />
-            crypto marketing strategy.
+    <main className="min-h-screen p-4">
+      <div className="max-w-md mx-auto py-8">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-2">🐾 Web3 Tamagotchi</h1>
+          <p className="text-gray-600 mb-4">
+            Виртуальный питомец на блокчейне Base
           </p>
 
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <input
-              type="email"
-              placeholder="Your amazing email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.emailInput}
-            />
-            
-            {error && <p className={styles.error}>{error}</p>}
-            
-            <button type="submit" className={styles.joinButton}>
-              JOIN WAITLIST
+          <div className="flex gap-2 justify-center mb-4">
+            <button
+              onClick={() => setShowRules(true)}
+              className="btn-pixel bg-yellow-400"
+            >
+              📖 Правила
             </button>
-          </form>
-        </div>
+          </div>
+
+          {/* Отображение информации о пользователе */}
+          {userProfile ? (
+            <div className="flex gap-3 ml-4">
+              {/* Аватар */}
+              {userProfile.pfpUrl && (
+                <Image
+                  src={userProfile.pfpUrl}
+                  alt={userProfile.username || "User avatar"}
+                  width={48}
+                  height={48}
+                  className="object-cover"
+                  unoptimized
+                />
+              )}
+
+              {/* Имя пользователя */}
+              <div className="flex flex-col">
+                {userProfile.displayName && (
+                  <span className="font-semibold text-sm text-white">
+                    {userProfile.displayName}
+                  </span>
+                )}
+                {userProfile.username && (
+                  <span className="text-xs text-gray-500">
+                    @{userProfile.username}
+                  </span>
+                )}
+              </div>
+            </div>
+          ) : (
+            <Wallet />
+          )}
+        </header>
+
+        {!address ? (
+          <div className="bg-white pixel-border p-8 text-center">
+            <p className="text-lg mb-4">
+              👆 Подключите кошелек, чтобы начать играть
+            </p>
+            <p className="text-sm text-gray-600">Нужна сеть Base Mainnet</p>
+          </div>
+        ) : !hasPet ? (
+          <div className="bg-white pixel-border p-6">
+            <PetSelection onSelect={createPet} isPending={isPending} />
+          </div>
+        ) : (
+          <GameScreen
+            pet={pet}
+            quest={quest}
+            actions={{ feed, play, sleep }}
+            isPending={isPending}
+          />
+        )}
+
+        <footer className="text-center mt-8 text-sm text-gray-600">
+          <p>Все транзакции бесплатные, только газ сети Base</p>
+          <p className="mt-2">Играйте каждый день для поддержания стрика! 🔥</p>
+        </footer>
       </div>
-    </div>
+
+      <RulesModal isOpen={showRules} onClose={() => setShowRules(false)} />
+    </main>
   );
 }
