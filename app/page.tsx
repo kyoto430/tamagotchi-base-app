@@ -9,6 +9,7 @@ import { RulesModal } from "./src/components/RulesModal";
 import { useTamagotchi } from "./src/hooks/useTamagotchi";
 import Image from "next/image";
 import { Wallet } from "@coinbase/onchainkit/wallet";
+import { useMiniKit } from "@coinbase/onchainkit/minikit";
 // import { Metadata } from "next";
 
 // export const metadata: Metadata = {
@@ -37,7 +38,22 @@ interface AuthResponse {
 
 export default function Home() {
   const { isReady } = useMiniApp();
-  const [userProfile] = useState<UserProfile | null>(null);
+  const { setFrameReady, isFrameReady, context } = useMiniKit();
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    if (!isFrameReady) {
+      setFrameReady();
+    }
+  }, [setFrameReady, isFrameReady]);
+
+  // Получаем данные пользователя после инициализации
+  useEffect(() => {
+    if (isFrameReady && context?.user) {
+      console.log("User context:", context.user);
+      setUserProfile(context.user as UserProfile);
+    }
+  }, [isFrameReady, context]);
 
   const { address } = useAccount();
   const { pet, quest, createPet, feed, play, sleep, isPending } =
@@ -73,9 +89,7 @@ export default function Home() {
       <div className="max-w-md mx-auto py-8">
         <header className="bg-white pixel-border text-center mb-8">
           <h1 className="text-4xl font-bold mb-2 mt-2">🐾 Tamagotchi</h1>
-          <p className="mb-4">
-            Виртуальный питомец на блокчейне Base
-          </p>
+          <p className="mb-4">Виртуальный питомец на блокчейне Base</p>
 
           <div className="flex gap-2 justify-center mb-4">
             <button
@@ -103,18 +117,15 @@ export default function Home() {
                     unoptimized
                   />
                 )}
-
                 {/* Имя пользователя */}
                 <div className="flex flex-col">
                   {userProfile.displayName && (
-                    <span className="font-semibold text-sm text-white">
+                    <span className="font-semibold text-sm">
                       {userProfile.displayName}
                     </span>
                   )}
                   {userProfile.username && (
-                    <span className="text-xs text-gray-500">
-                      @{userProfile.username}
-                    </span>
+                    <span className="text-xs">@{userProfile.username}</span>
                   )}
                 </div>
               </div>
