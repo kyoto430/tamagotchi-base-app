@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = '0xE7CEB07b848F28D2ccEf614Fa6ffe6a9AdDF6210';
+export const CONTRACT_ADDRESS = '0xFC4bB125de819a7615A3434E18EC3065E0324B8D';
 
 export const CONTRACT_ABI = [
   {
@@ -30,6 +30,13 @@ export const CONTRACT_ABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "claimPassivePoints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
     "name": "spendPoints",
     "outputs": [],
@@ -49,6 +56,7 @@ export const CONTRACT_ABI = [
         {"internalType": "uint256", "name": "experience", "type": "uint256"},
         {"internalType": "uint256", "name": "points", "type": "uint256"},
         {"internalType": "uint256", "name": "lastInteraction", "type": "uint256"},
+        {"internalType": "uint256", "name": "lastPassiveClaim", "type": "uint256"},
         {"internalType": "uint256", "name": "streak", "type": "uint256"},
         {"internalType": "uint256", "name": "lastStreakDay", "type": "uint256"},
         {"internalType": "bool", "name": "exists", "type": "bool"}
@@ -68,12 +76,28 @@ export const CONTRACT_ABI = [
         {"internalType": "uint8", "name": "feedCount", "type": "uint8"},
         {"internalType": "uint8", "name": "playCount", "type": "uint8"},
         {"internalType": "uint8", "name": "sleepCount", "type": "uint8"},
-        {"internalType": "uint256", "name": "lastReset", "type": "uint256"}
+        {"internalType": "uint256", "name": "lastReset", "type": "uint256"},
+        {"internalType": "bool", "name": "completedToday", "type": "bool"},
+        {"internalType": "uint256", "name": "lastCompletionDay", "type": "uint256"}
       ],
       "internalType": "struct Tamagotchi.Quest",
       "name": "",
       "type": "tuple"
     }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "owner", "type": "address"}],
+    "name": "getCooldownRemaining",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "owner", "type": "address"}],
+    "name": "getPendingPassivePoints",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
     "stateMutability": "view",
     "type": "function"
   }
