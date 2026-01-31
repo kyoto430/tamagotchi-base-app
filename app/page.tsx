@@ -60,6 +60,32 @@ export default function Home() {
             Виртуальный питомец на блокчейне Base
           </p>
 
+          {/* User info from Farcaster Mini App */}
+          {!isLoading && user && (
+            <div className="bg-white pixel-border p-3 mb-4 flex items-center gap-3">
+              {user.pfpUrl && (
+                <Image
+                  src={user.pfpUrl}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full border-2 border-black"
+                />
+              )}
+              <div className="text-left flex-1">
+                <p className="font-bold text-sm">
+                  {user.displayName || user.username || "Player"}
+                </p>
+                {user.username && (
+                  <p className="text-xs text-gray-600">@{user.username}</p>
+                )}
+              </div>
+              {user.fid && (
+                <span className="text-xs bg-purple-100 px-2 py-1 rounded font-mono">
+                  FID: {user.fid}
+                </span>
+              )}
+            </div>
+          )}
+
           <div className="flex gap-2 justify-center mb-4">
             <button
               onClick={() => setShowRules(true)}
@@ -72,31 +98,7 @@ export default function Home() {
 
         {!address ? (
           <div className="bg-white pixel-border p-8 text-center">
-            {/* User info from Farcaster Mini App */}
-            {!isLoading && user && (
-              <div className="bg-white pixel-border p-3 mb-4 flex items-center gap-3">
-                {user.pfpUrl && (
-                  <Image
-                    src={user.pfpUrl}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full border-2 border-black"
-                  />
-                )}
-                <div className="text-left flex-1">
-                  <p className="font-bold text-sm">
-                    {user.displayName || user.username || "Player"}
-                  </p>
-                  {user.username && (
-                    <p className="text-xs text-gray-600">@{user.username}</p>
-                  )}
-                </div>
-                {user.fid && (
-                  <span className="text-xs bg-purple-100 px-2 py-1 rounded font-mono">
-                    FID: {user.fid}
-                  </span>
-                )}
-              </div>
-            )}
+            
           </div>
         ) : !hasPet ? (
           <div className="bg-white pixel-border p-6">
