@@ -7,7 +7,6 @@ import { GameScreen } from "./src/components/GameScreen";
 import { RulesModal } from "./src/components/RulesModal";
 import { useTamagotchi } from "./src/hooks/useTamagotchi";
 import sdk from "@farcaster/miniapp-sdk";
-import Image from "next/image";
 
 // Правильный тип для контекста
 type FarcasterContext = Awaited<typeof sdk.context>;
@@ -62,14 +61,14 @@ export default function Home() {
 
           {/* User info from Farcaster Mini App */}
           {!isLoading && user && (
-            <div className="bg-white pixel-border p-3 mb-4 flex items-center gap-3">
-              {user.pfpUrl && (
+            <div className="p-3 mb-4 flex items-center gap-3">
+              {/* {user.pfpUrl && (
                 <Image
                   src={user.pfpUrl}
                   alt="Profile"
                   className="w-10 h-10 rounded-full border-2 border-black"
                 />
-              )}
+              )} */}
               <div className="text-left flex-1">
                 <p className="font-bold text-sm">
                   {user.displayName || user.username || "Player"}
@@ -79,7 +78,7 @@ export default function Home() {
                 )}
               </div>
               {user.fid && (
-                <span className="text-xs bg-purple-100 px-2 py-1 rounded font-mono">
+                <span className="text-xs bg-blue-100 px-2 py-1 rounded font-mono">
                   FID: {user.fid}
                 </span>
               )}
@@ -115,9 +114,9 @@ export default function Home() {
           />
         )}
 
-        <footer className="text-center mt-8 text-sm text-gray-600 bg-white pixel-border p-4">
+        <footer className="text-center mt-8 text-sm text-gray-600 bg-white pixel-border p-2">
           <p>Все транзакции бесплатные, только газ сети Base</p>
-          <p className="mt-2">Играйте каждый день для поддержания стрика! 🔥</p>
+          <p className="mt-2">Built on Base by kyoto430.base.eth</p>
         </footer>
       </div>
 
