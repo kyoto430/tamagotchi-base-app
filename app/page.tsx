@@ -80,7 +80,7 @@ export default function Home() {
               )}
             </div>
           ) : (
-            <Wallet />
+            <div className="flex justify-center mb-4"><Wallet /></div>
           )}
 
           <div className="flex gap-2 justify-center mb-4">
@@ -113,8 +113,11 @@ export default function Home() {
         <footer className="text-center mt-8 text-sm text-gray-600 bg-white pixel-border p-2">
           <p className="mt-2">
             Built on Base by{" "}
-            <Link href="https://base.app/profile/0x9e2D230EF9cf676Faa8cfb1101c0ae44AD615d18">
-              <a className="underline">kyoto430.base.eth</a>
+            <Link
+              className="underline"
+              href="https://base.app/profile/0x9e2D230EF9cf676Faa8cfb1101c0ae44AD615d18"
+            >
+              kyoto430.base.eth
             </Link>
           </p>
         </footer>
