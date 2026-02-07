@@ -31,8 +31,8 @@ export function RulesModal({
                 <strong>Feed</strong> - increases satiety (+25)
               </li>
               <li>
-                <strong>Play</strong> - increases happiness (+30), тратит
-                энергию (-15)
+                <strong>Play</strong> - increases happiness (+30), spends energy
+                (-15)
               </li>
               <li>
                 <strong>Sleep</strong> - restores energy (+40)

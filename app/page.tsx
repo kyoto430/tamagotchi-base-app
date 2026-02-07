@@ -73,6 +73,11 @@ export default function Home() {
                   <p className="text-xs text-gray-400">@{user.username}</p>
                 )}
               </div>
+              {user.fid && (
+                <span className="text-xs bg-blue-100 px-2 py-1 rounded font-mono">
+                  FID: {user.fid}
+                </span>
+              )}
             </div>
           ) : (
             <Wallet />
