@@ -12,81 +12,80 @@ export function RulesModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div className="bg-white pixel-border max-w-md w-full max-h-[80vh] overflow-y-auto p-6">
-        <h2 className="text-2xl font-bold mb-4">🎮 Правила игры</h2>
+        <h2 className="text-2xl font-bold mb-4">🎮 The rules of the game</h2>
 
         <div className="space-y-4 text-sm">
           <section>
-            <h3 className="font-bold text-lg mb-2">🐾 Как играть:</h3>
+            <h3 className="font-bold text-lg mb-2">🐾 How to play:</h3>
             <ul className="list-disc list-inside space-y-1">
-              <li>Выберите питомца из 5 доступных видов</li>
-              <li>Взаимодействуйте с ним каждый день</li>
-              <li>Следите за показателями: голод, счастье, энергия</li>
+              <li>Choose a pet from 5 available species</li>
+              <li>Interact with him every day.</li>
+              <li>Keep an eye on the indicators: hunger, happiness, energy</li>
             </ul>
           </section>
 
           <section>
-            <h3 className="font-bold text-lg mb-2">⚡ Действия:</h3>
+            <h3 className="font-bold text-lg mb-2">⚡ Actions:</h3>
             <ul className="list-disc list-inside space-y-1">
               <li>
-                <strong>Покормить</strong> - увеличивает сытость (+25)
+                <strong>Feed</strong> - increases satiety (+25)
               </li>
               <li>
-                <strong>Поиграть</strong> - повышает счастье (+30), тратит
+                <strong>Play</strong> - increases happiness (+30), тратит
                 энергию (-15)
               </li>
               <li>
-                <strong>Спать</strong> - восстанавливает энергию (+40)
+                <strong>Sleep</strong> - restores energy (+40)
               </li>
             </ul>
-            <p className="mt-2 text-gray-600">⏱️ Между действиями: 30 секунд</p>
+            <p className="mt-2 text-gray-600">⏱️ Between actions: 10 seconds</p>
           </section>
 
           <section>
-            <h3 className="font-bold text-lg mb-2">📊 Система прогресса:</h3>
+            <h3 className="font-bold text-lg mb-2">📊 Progress system:</h3>
             <ul className="list-disc list-inside space-y-1">
               <li>
-                <strong>Опыт</strong> - получайте за действия
+                <strong>Experience</strong> - Get paid for your actions
               </li>
               <li>
-                <strong>Уровень</strong> - каждые 100 опыта
+                <strong>Level</strong> - Every 100 experience points
               </li>
               <li>
-                <strong>Очки</strong> - пассивный доход = уровень/день
+                <strong>Points</strong> - passive income = lvl/day
               </li>
             </ul>
           </section>
 
           <section>
-            <h3 className="font-bold text-lg mb-2">🔥 Стрики:</h3>
+            <h3 className="font-bold text-lg mb-2">🔥 Streak:</h3>
             <p>
-              Заходите каждый день, чтобы поддерживать стрик! Бонус к опыту:
-              +10% за каждый день стрика.
+              Come back every day to keep the stream going! Experience Bonus:
+              +10% for each day of the stream.
             </p>
           </section>
 
           <section>
-            <h3 className="font-bold text-lg mb-2">✅ Ежедневные квесты:</h3>
+            <h3 className="font-bold text-lg mb-2">✅ Daily Quests:</h3>
             <p>
-              Выполните 3 действия каждого типа (покормить, поиграть, спать) для
-              получения 50 опыта!
+              Perform 3 actions of each type (feed, play, sleep) for Get 50
+              experience points!
             </p>
           </section>
 
           <section>
-            <h3 className="font-bold text-lg mb-2">⚠️ Важно:</h3>
+            <h3 className="font-bold text-lg mb-2">⚠️ Important:</h3>
             <ul className="list-disc list-inside space-y-1">
-              <li>Показатели падают каждые 6 часов на 10</li>
-              <li>Все транзакции требуют только газ сети Base</li>
-              <li>Питомца можно выбрать только один раз</li>
+              <li>The indicators drop by 10 every 6 hours</li>
+              <li>
+                All transactions require only the gas of the Base network.
+              </li>
+              <li>A pet can only be selected once.</li>
             </ul>
           </section>
         </div>
 
-        <button
-          onClick={onClose}
-          className="btn-pixel w-full mt-6 bg-primary"
-        >
-          Понятно!
+        <button onClick={onClose} className="btn-pixel w-full mt-6 bg-primary">
+          Got it!
         </button>
       </div>
     </div>

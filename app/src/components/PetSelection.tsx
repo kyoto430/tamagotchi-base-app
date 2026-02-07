@@ -4,11 +4,11 @@ import { PetSVG } from "../lib/pets";
 import { PET_TYPES } from "../lib/contract";
 
 const pets = [
-  { id: 0, name: "Котик", emoji: "🐱", color: "bg-orange-200" },
-  { id: 1, name: "Собачка", emoji: "🐕", color: "bg-amber-200" },
-  { id: 2, name: "Дракон", emoji: "🐉", color: "bg-purple-200" },
-  { id: 3, name: "Единорог", emoji: "🦄", color: "bg-pink-200" },
-  { id: 4, name: "Робот", emoji: "🤖", color: "bg-gray-200" },
+  { id: 0, name: "Cat", emoji: "🐱", color: "bg-orange-200" },
+  { id: 1, name: "Dog", emoji: "🐕", color: "bg-amber-200" },
+  { id: 2, name: "Dragon", emoji: "🐉", color: "bg-purple-200" },
+  { id: 3, name: "Unicorn", emoji: "🦄", color: "bg-pink-200" },
+  { id: 4, name: "Robot", emoji: "🤖", color: "bg-gray-200" },
 ];
 
 export function PetSelection({
@@ -21,8 +21,8 @@ export function PetSelection({
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-3xl font-bold mb-2">Выбери питомца</h2>
-        <p className="text-gray-600">Выбор нельзя изменить!</p>
+        <h2 className="text-3xl font-bold mb-2">Choose a pet</h2>
+        <p className="text-gray-600">The selection cannot be changed!</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
@@ -52,7 +52,7 @@ export function PetSelection({
 
       {isPending && (
         <div className="text-center text-sm text-gray-600">
-          ⏳ Создание питомца...
+          ⏳ Creating a pet...
         </div>
       )}
     </div>

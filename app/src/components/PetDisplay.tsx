@@ -16,9 +16,9 @@ export function PetDisplay({
       </div>
 
       <div className="text-center mt-4">
-        {mood === "happy" && <p className="text-lg">😊 Счастлив!</p>}
-        {mood === "neutral" && <p className="text-lg">😐 Нормально</p>}
-        {mood === "sad" && <p className="text-lg">😢 Грустно...</p>}
+        {mood === "happy" && <p className="text-lg">😊 Happy!</p>}
+        {mood === "neutral" && <p className="text-lg">😐 Normally</p>}
+        {mood === "sad" && <p className="text-lg">😢 Sadly...</p>}
       </div>
     </div>
   );

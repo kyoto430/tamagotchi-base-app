@@ -17,15 +17,15 @@ export function GameScreen({ pet, quest, actions, isPending, cooldownRemaining, 
   return (
     <div className="space-y-4">
       <Stats pet={pet} />
-      
+
       <div className="bg-white pixel-border p-6">
-        <PetDisplay 
-          petType={Number(pet.petType)} 
+        <PetDisplay
+          petType={Number(pet.petType)}
           mood={getMood()}
         />
       </div>
 
-      <ActionButtons 
+      <ActionButtons
         actions={actions}
         isPending={isPending}
         energy={Number(pet.energy)}
@@ -36,9 +36,9 @@ export function GameScreen({ pet, quest, actions, isPending, cooldownRemaining, 
         <div className="bg-gradient-to-r from-yellow-100 to-yellow-200 pixel-border p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-bold">💰 Пассивный доход</p>
+              <p className="font-bold">💰 Passive income</p>
               <p className="text-sm text-gray-600">
-                Доступно: {pendingPoints} очков
+                Available: {pendingPoints} points
               </p>
             </div>
             <button
@@ -46,7 +46,7 @@ export function GameScreen({ pet, quest, actions, isPending, cooldownRemaining, 
               disabled={isPending}
               className="btn-pixel bg-yellow-400 hover:bg-yellow-500 text-sm px-4 py-2"
             >
-              Забрать
+              Pick up
             </button>
           </div>
         </div>
@@ -58,19 +58,18 @@ export function GameScreen({ pet, quest, actions, isPending, cooldownRemaining, 
         <div className="grid grid-cols-2 gap-4 text-center text-sm">
           <div>
             <div className="text-2xl font-bold">🔥 {pet.streak.toString()}</div>
-            <div className="text-gray-600">Стрик</div>
+            <div className="text-gray-600">Streak</div>
           </div>
           <div>
             <div className="text-2xl font-bold">💎 {pet.points.toString()}</div>
-            <div className="text-gray-600">Очки</div>
+            <div className="text-gray-600">Points</div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white pixel-border text-center text-xs text-gray-600 space-y-1">
-        <p>⚡ Пассивный доход: {pet.level.toString()} очков/день</p>
-        <p>📈 Каждый уровень = +1 очко в день</p>
-        <p>⏱️ Кулдаун между действиями: 10 секунд</p>
+      <div className="bg-white pixel-border text-center text-xs p-2 text-gray-600 space-y-1">
+        <p>⚡ Passive income: {pet.level.toString()} points/day</p>
+        <p>📈 Each level = +1 point per day</p>
       </div>
     </div>
   );
