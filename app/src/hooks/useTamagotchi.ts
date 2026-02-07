@@ -103,6 +103,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       abi: CONTRACT_ABI,
       functionName: 'createPet',
       args: [petType],
+      chainId: 8453, // Base Mainnet
     });
   };
 
@@ -112,6 +113,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
       functionName: 'feed',
+      chainId: 8453, // Base Mainnet
     });
   };
 
@@ -121,6 +123,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
       functionName: 'play',
+      chainId: 8453, // Base Mainnet
     });
   };
 
@@ -130,6 +133,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
       functionName: 'sleep',
+      chainId: 8453, // Base Mainnet
     });
   };
 
@@ -138,6 +142,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
       functionName: 'claimPassivePoints',
+      chainId: 8453, // Base Mainnet
     });
   };
 
@@ -147,6 +152,7 @@ export function useTamagotchi(address: `0x${string}` | undefined) {
       abi: CONTRACT_ABI,
       functionName: 'spendPoints',
       args: [amount],
+      chainId: 8453, // Base Mainnet
     });
   };
 
