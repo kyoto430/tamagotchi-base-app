@@ -23,7 +23,7 @@ export const farcasterConfig = {
     subtitle: "Tamagotchi game on Base",
     description: "Have fun",
     screenshotUrls: [`${ROOT_URL}/screenshot-portrait.png`],
-    iconUrl: `${ROOT_URL}/blue-icon.png`,
+    iconUrl: `${ROOT_URL}/blue-hero.png`,
     splashImageUrl: `${ROOT_URL}/blue-hero.png`,
     splashBackgroundColor: "#000000",
     homeUrl: ROOT_URL,
